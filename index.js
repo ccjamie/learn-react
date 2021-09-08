@@ -1,32 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './style.css';
 
-let counter = 0;
+class Counter extends React.Component {
+  state = {
+    counter: 0
+  };
 
-class Hi extends React.Component {
+  increment = () => {
+    this.setState({
+      counter: this.state.counter + 1
+    });
+  };
+
   render() {
-    return <h1> Hi {this.props.name} from class. </h1>;
+    return (
+      <div>
+        <p>{this.state.counter}</p>
+        <button onClick={this.increment}>Increment</button>
+      </div>
+    );
   }
 }
 
-var Hello = props => {
-  return (
-    <h1>
-      Hello {props.name} num is {props.num}.
-    </h1>
-  );
-};
+const el = <Counter />;
 
-var Output = () => {
-  return (
-    <div>
-      <Hello name="a" num="10" />
-      <Hello name="b" num="2" />
-      <Hi name="c" />
-    </div>
-  );
-};
-
-const el = <Hello name="Jamie" num="3" />;
-ReactDOM.render(<Output />, document.getElementById('root'));
+ReactDOM.render(el, document.getElementById('root'));
